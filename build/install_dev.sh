@@ -14,6 +14,6 @@ ln -s /mnt/src/conf/nginx_default.conf /etc/nginx/sites-available/moneoresto_che
 ln -s /etc/nginx/sites-available/moneoresto_checker /etc/nginx/sites-enabled/moneoresto_checker
 
 sqlite3 /var/www/moneoresto_checker/api/moneoresto_checker.db < /var/www/moneoresto_checker/api/moneoresto_checker.sql
-chown -R www-data:www-data /var/www/moneoresto_checker/api
+chown -R www-data:www-data /var/www/moneoresto_checker/api/moneoresto_checker.db
 
 
