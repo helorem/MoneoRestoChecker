@@ -1,0 +1,6 @@
+#!/bin/sh
+
+ln -s /etc/nginx/sites-available/moneoresto_checker /etc/nginx/sites-enabled/
+sqlite3 /var/www/moneoresto_checker/api/moneoresto_checker.db < /var/www/moneoresto_checker/api/moneoresto_checker.sql
+chown -R www-data:www-data /var/www/moneoresto_checker
+
