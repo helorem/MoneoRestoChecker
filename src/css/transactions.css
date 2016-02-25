@@ -1,0 +1,13 @@
+#transactions {
+    width : 600px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#transactions .amount {
+    text-align : right;
+}
+
+#transactions th {
+    text-align : center;
+}

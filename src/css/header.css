@@ -1,0 +1,16 @@
+.logo.header {
+	padding : 5px;
+#	margin-bottom : 30px;
+}
+
+.logo.header img {
+	height : 100px;
+	vertical-align : middle;
+}
+
+.logo.header h1 {
+	display : inline;
+	vertical-align : middle;
+	margin-left : 20px;
+}
+

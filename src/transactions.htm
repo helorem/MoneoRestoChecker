@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="libs/jquery-2.1.1.js"></script>
+        <script src="libs/SemanticUI/semantic.js"></script>
+        <script src="js/functions.js"></script>
+        <link rel="stylesheet" type="text/css" href="libs/SemanticUI/semantic.css" />
+        <link rel="stylesheet" type="text/css" href="css/header.css" />
+        <link rel="stylesheet" type="text/css" href="css/transactions.css" />
+        <title>MoneoResto</title>
+        <script type="text/javascript">
+            function format_amount(amount)
+            {
+                res = amount.toString();
+                if (res.indexOf(".") === false)
+                {
+                    res += ".0";
+                }
+                parts = res.split(".");
+                parts[0] = fixed_size(parts[0], 2, " ");
+                parts[1] = (parts[1] + "00").slice(0, 2);
+                res = parts[0] + "." + parts[1];
+                return res
+            }
+
+            function load()
+            {
+                var load_fct = function(data) {
+                        $table = $("#transactions");
+                        for (i in data)
+                        {
+                            var item = data[i];
+                            var name = item["name"];
+                            var amount = format_amount(item["amount"])
+                            var dt = convert_datetime(item["dt"], true);
+                            $table.append("<tr><td>" + dt + "</td><td class='amount'>" + amount + " €</td><td>" + name + "</td></tr>");
+                        }
+                    };
+
+                var res = $.get("api/get_transactions", load_fct, "json");
+                res.fail(function(data) { console.error(data.responseText); });
+            }
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            test_logged();
+        </script>
+        <table class="ui celled table transactions" id="transactions">
+            <tr>
+                <th>Date</th>
+                <th>Montant</th>
+                <th>Description</th>
+            </tr>
+        </table>
+        <script type="text/javascript">
+            load();
+            display_header("MoneoResto Checker");
+        </script>
+    </body>
+</html>

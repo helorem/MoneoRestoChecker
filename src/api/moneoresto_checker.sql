@@ -1,4 +1,4 @@
-CREATE TABLE transaction (
+CREATE TABLE transact (
 	id INTEGER PRIMARY KEY,
 	name TEXT,
 	amount INTEGER,
@@ -11,4 +11,10 @@ CREATE TABLE balance (
 	validity DATE
 );
 
+CREATE TABLE user (
+	id INTEGER PRIMARY KEY,
+	username TEXT,
+	password TEXT
+);
 
+INSERT INTO user (username, password) VALUES ("admin", "9cf95dacd226dcf43da376cdb6cbba7035218921");

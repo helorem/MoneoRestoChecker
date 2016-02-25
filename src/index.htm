@@ -1,1 +1,54 @@
-TODO
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="libs/jquery-2.1.1.js"></script>
+        <script src="libs/SemanticUI/semantic.js"></script>
+        <script src="js/functions.js"></script>
+        <link rel="stylesheet" type="text/css" href="libs/SemanticUI/semantic.css" />
+        <link rel="stylesheet" type="text/css" href="css/header.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>MoneoResto</title>
+        <script type="text/javascript">
+            function load()
+            {
+                var load_fct = function(data) {
+                        var total = 0;
+                        for (i in data)
+                        {
+                            var amount = data[i]["amount"];
+                            var validity = convert_datetime(data[i]["validity"]);
+                            total += amount;
+                            $("#details").append('<tr><td class="amount">' + amount + ' €</td><td>valide jusqu\'au <span class="date">'
+                                    + validity + '</span></td></tr>');
+                        }
+
+                        total = Math.round(total * 100) / 100
+
+                        $("#total").text(total + " €");
+                    };
+
+                var res = $.get("api/get_balances", load_fct, "json");
+                res.fail(function(data) { console.error(data.responseText); });
+            }
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            test_logged();
+        </script>
+        <div style="text-align : center">
+            <div class="ui label">Montant disponible :</div><br />
+            <br />
+            <span id="total"></span>
+            <br />
+            <br />
+            <div class="ui label">Détails :</div><br />
+            <table class="ui table details" id="details">
+            </table>
+        </div>
+        <script type="text/javascript">
+            load();
+            display_header("MoneoResto Checker");
+        </script>
+    </body>
+</html>
