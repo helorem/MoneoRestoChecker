@@ -2,7 +2,7 @@ import threading
 import Queue
 import sqlite3
 
-SQLITE_FILE = "moneoresto_checker.db"
+SQLITE_FILE = "moneoresto-checker.db"
 
 class DBConsumer:
     def __init__(self, filename):

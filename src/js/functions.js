@@ -54,7 +54,7 @@ function show_message(msg, type)
     }
 }
 
-function display_header(text, path_prefix)
+function display_header(text, disable_menu, path_prefix)
 {
     if (!path_prefix)
     {
@@ -65,32 +65,35 @@ function display_header(text, path_prefix)
 
     var $div;
 
-    $div = $('<div class="ui menu" />');
-    var page_name = location.pathname
-
-    var pages = {
-        "index.htm" : ["Accueil", "/moneoresto_checker/index.htm"],
-        "transactions.htm" : ["Transactions", "/moneoresto_checker/transactions.htm"],
-    };
-
-    var $item;
-    var p_item;
-    for (href in pages)
+    if (!disable_menu)
     {
-        p_item = pages[href];
-        $item = $('<a class="blue item" />').text(p_item[0]).attr("href", href);
-        if (location.pathname == p_item[1])
+        $div = $('<div class="ui menu" />');
+        var page_name = location.pathname
+
+        var pages = {
+            "index.htm" : ["Accueil", "/moneoresto_checker/index.htm"],
+            "transactions.htm" : ["Transactions", "/moneoresto_checker/transactions.htm"],
+        };
+
+        var $item;
+        var p_item;
+        for (href in pages)
         {
-            $item.addClass("active");
+            p_item = pages[href];
+            $item = $('<a class="blue item" />').text(p_item[0]).attr("href", href);
+            if (location.pathname == p_item[1])
+            {
+                $item.addClass("active");
+            }
+            $div.append($item);
         }
-        $div.append($item);
+        var $div2 = $('<div class="right menu" />');
+        var $item = $('<div class="item" />');
+        $item.append($('<div class="ui button" />').text("Deconnexion").attr("onclick", "logout()"));
+        $div2.append($item);
+        $div.append($div2);
+        $root.prepend($div);
     }
-    var $div2 = $('<div class="right menu" />');
-    var $item = $('<div class="item" />');
-    $item.append($('<div class="ui button" />').text("Deconnexion").attr("onclick", "logout()"));
-    $div2.append($item);
-    $div.append($div2);
-    $root.prepend($div);
 
     $div = $('<div class="logo header" />');
     $div.append($('<h1 />').text(text));

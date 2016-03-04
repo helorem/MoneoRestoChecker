@@ -8,6 +8,7 @@ import os
 import hashlib
 
 from DBConsumer import DBConsumer
+from MoneoChecker import MoneoChecker
 
 app = flask.Flask(__name__)
 
@@ -73,7 +74,7 @@ def www_get_balances():
     res = []
     try:
         test_logged()
-        req = "SELECT amount, validity FROM balance WHERE amount > 0 ORDER BY validity"
+        req = "SELECT (amount / 100.00) as amount, validity FROM balance WHERE amount > 0 ORDER BY validity"
         for row in DBConsumer.get_instance().query(req):
             res.append(dict(zip(row.keys(), row)))
     except AuthError as ex:
@@ -85,7 +86,7 @@ def www_get_transactions():
     res = []
     try:
         test_logged()
-        req = "SELECT name, amount, dt FROM transact ORDER BY dt DESC LIMIT 50"
+        req = "SELECT name, (amount / 100.00) as amount, dt FROM transact ORDER BY dt DESC LIMIT 50"
         for row in DBConsumer.get_instance().query(req):
             res.append(dict(zip(row.keys(), row)))
     except AuthError as ex:
@@ -109,13 +110,20 @@ def generate_random_secret(length):
     return ''.join(random.choice(chars) for i in xrange(length))
 
 if __name__ == "__main__":
+    conf = {}
+    with open("moneoresto-checker.conf", "r") as fd:
+        conf = json.load(fd)
+
     DBConsumer.get_instance()
+    checker = MoneoChecker(conf["checker"])
+    checker.start()
     try:
         # set the secret key.  keep this really secret:
         app.secret_key = generate_random_secret(1024)
 
         #TODO improve port (conf file ?)
-        app.debug = True
+        app.debug = False
         app.run(port=5123)
     finally:
+        checker.stop()
         DBConsumer.get_instance().close()

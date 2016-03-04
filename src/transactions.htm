@@ -12,7 +12,7 @@
             function format_amount(amount)
             {
                 res = amount.toString();
-                if (res.indexOf(".") === false)
+                if (res.indexOf(".") == -1)
                 {
                     res += ".0";
                 }

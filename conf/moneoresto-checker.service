@@ -1,0 +1,11 @@
+[Unit]
+Description=MoneoResto_Checker
+
+[Service]
+PIDFile=/var/run/moneoresto-checker.pid
+RemainAfterExit=no
+ExecStart=/usr/bin/moneoresto-checker.sh
+User=www-data
+
+[Install]
+WantedBy=multi-user.target

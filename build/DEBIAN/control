@@ -1,11 +1,11 @@
-Package: moneoresto_checker
+Package: moneoresto-checker
 Version: 1.0.0
 Section: custom
 Priority: optional
 Architecture: all
 Essential: no
 Pre-Depends: bash, sqlite3
-Depends: python-flask, python-sqlite
+Depends: python-flask, python-sqlite, python-requests
 Maintainer: Romain CONNESSON
 Description: Website for MoneoResto
 
