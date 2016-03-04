@@ -2,6 +2,6 @@
 
 ln -s /etc/nginx/sites-available/moneoresto-checker /etc/nginx/sites-enabled/
 sqlite3 /var/www/moneoresto-checker/api/moneoresto-checker.db < /var/www/moneoresto-checker/api/moneoresto-checker.sql
-chown www-data:www-data /var/www/moneoresto-checker/api/moneoresto-checker.db
+chown -R www-data:www-data /var/www/moneoresto-checker
 touch /var/log/moneoresto-checker.log
 chown www-data:www-data /var/log/moneoresto-checker.log
