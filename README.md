@@ -17,6 +17,12 @@ The container system is based on Docker.
 sudo apt-get install docker.io
 ```
 
+You have to create a bin dir in the repo
+```bash
+cd MoneoResotChecker
+mkdir bin
+```
+
 ## Usage
 
 ### make deb
