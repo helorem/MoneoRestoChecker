@@ -1,7 +1,11 @@
 # moneoresto_checker
 
 ## Description
-TODO
+A new user interface for MoneResto data, based on the Android app API. A Python server fetch data, save it in a sqlite db and serve json.
+The Ui is full HTML/CSS/JavaScript.
+
+## Configuration
+You have to edit the file src/api.moneoresto-checker.conf. By default, it use the fakeserver (tools/fakeserver.py) to simulate data.
 
 ## Requirement
 This project was optimized for Nginx. It could run with another WebServer, but not the deploy system.
